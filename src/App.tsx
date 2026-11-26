@@ -17,7 +17,7 @@ export default function App() {
         <Route element={<Layout />}>
           <Route path="/dashboard" element={<Locations />} />
           <Route path="/locations/:id" element={<LocationDetail />} />
-          <Route path="/me/tickets" element={<MyTickets />} />
+          <Route path="/my-tickets" element={<MyTickets />} />
         </Route>
       </Route>
       <Route path="*" element={<Navigate to="/dashboard" replace />} />

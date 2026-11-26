@@ -13,7 +13,7 @@ export default function Layout() {
         <nav className="mx-auto flex max-w-4xl items-center gap-4 p-4">
           <span className="font-bold text-blue-700">AulaSoporte</span>
           <Link to="/dashboard" className="text-gray-700 hover:underline">Dashboard</Link>
-          <Link to="/me/tickets" className="text-gray-700 hover:underline">Mis solicitudes</Link>
+          <Link to="/my-tickets" className="text-gray-700 hover:underline">Mis solicitudes</Link>
           <button onClick={logout} className="ml-auto rounded bg-gray-800 px-3 py-1 text-white">Cerrar sesión</button>
         </nav>
       </header>
