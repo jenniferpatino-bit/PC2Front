@@ -34,10 +34,6 @@ export function errorCode(err: unknown): string | undefined {
   if (axios.isAxiosError<{ code: string }>(err)) return err.response?.data?.code
   return undefined
 }
-// 
-export default defineConfig({
-  plugins: [react()],
-  server: {
-    port: 5173,
-  },
-}
+
+// git init && git add . && git commit -m "PC2 frontend" 
+// gh repo create PC2 --public --source=. --remote=origin && git push -u origin main
