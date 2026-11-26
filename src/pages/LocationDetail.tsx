@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent } from 'react'
+import { useCallback, useEffect, useState, type FormEvent } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { api, errorCode } from '../api/client'
 import type { Location, Ticket } from '../api/types'
@@ -17,12 +17,15 @@ export default function LocationDetail() {
   const [created, setCreated] = useState<Ticket | null>(null)
   const [sending, setSending] = useState(false)
 
-  useEffect(() => {
-    setLoading(true)
-    api.get<Location>(`/locations/${id}`).then((res) => setLocation(res.data))
+  const load = useCallback(() => {
+    return api.get<Location>(`/locations/${id}`).then((res) => setLocation(res.data))
       .catch((err) => setLoadError(errorCode(err) === 'NOT_FOUND' ? 'Espacio no encontrado' : 'No se pudo cargar'))
       .finally(() => setLoading(false))
   }, [id])
+
+  useEffect(() => {
+    load()
+  }, [load])
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault()
@@ -39,6 +42,7 @@ export default function LocationDetail() {
       const { data } = await api.post<Ticket>(`/locations/${id}/tickets`, { description: text })
       setCreated(data)
       setDescription('')
+      await load()
     } catch (err) {
       const closed = errorCode(err) === 'LOCATION_CLOSED'
       setSubmitError(closed ? 'El espacio está cerrado y no admite nuevas solicitudes.' : 'No se pudo registrar la solicitud')
@@ -52,7 +56,7 @@ export default function LocationDetail() {
 
   return (
     <section className="flex flex-col gap-4">
-      <Link to="/locations" className="text-blue-600 hover:underline">← Volver</Link>
+      <Link to="/dashboard" className="text-blue-600 hover:underline">← Volver al dashboard</Link>
       <div className="rounded-lg bg-white p-4 shadow">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold">{location.name}</h1>
