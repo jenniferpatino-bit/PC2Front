@@ -15,12 +15,12 @@ export default function App() {
       <Route path="/register" element={<Register />} />
       <Route element={<ProtectedRoute />}>
         <Route element={<Layout />}>
-          <Route path="/locations" element={<Locations />} />
+          <Route path="/dashboard" element={<Locations />} />
           <Route path="/locations/:id" element={<LocationDetail />} />
           <Route path="/me/tickets" element={<MyTickets />} />
         </Route>
       </Route>
-      <Route path="*" element={<Navigate to="/locations" replace />} />
+      <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>
   )
 }

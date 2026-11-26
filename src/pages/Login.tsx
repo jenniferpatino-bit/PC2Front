@@ -19,7 +19,7 @@ export default function Login() {
     try {
       const { data } = await api.post<{ token: string }>('/auth/login', { email, password })
       localStorage.setItem(TOKEN_KEY, data.token)
-      navigate('/locations')
+      navigate('/dashboard')
     } catch {
       setError('Credenciales incorrectas')
     } finally {
