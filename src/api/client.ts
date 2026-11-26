@@ -6,11 +6,6 @@ export const api = axios.create({
   baseURL: 'https://aulasoporte-api.aaron-navarro.workers.dev/api',
 })
 
-// git init -b main
-// git add .
-// git commit -m "PC2 frontend AulaSoporte"
-// git remote add origin https://github.com/jenniferpatino-bit/pc2.git
-// git push -u origin main
 
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem(TOKEN_KEY)
@@ -34,6 +29,3 @@ export function errorCode(err: unknown): string | undefined {
   if (axios.isAxiosError<{ code: string }>(err)) return err.response?.data?.code
   return undefined
 }
-
-// git init && git add . && git commit -m "PC2 frontend" 
-// gh repo create PC2 --public --source=. --remote=origin && git push -u origin main
